@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecisionTree : MonoBehaviour
+public class Character : MonoBehaviour
 {
     public GameObject playerLoc;
     private Transform playerTransform;
@@ -13,14 +13,38 @@ public class DecisionTree : MonoBehaviour
     private float dist;
     void Start()
     {
+        health="High";
         playerTransform = playerLoc.GetComponent<Transform>();
     }
     // Update is called once per frame
     void Update()
     {
+        if(health=="High" && Input.GetKey(KeyCode.H))
+        {
+            health="Low";
+        }
+        else if(health=="Low" && Input.GetKey(KeyCode.H))
+        {
+            health="High";
+        }
+
         delta = this.transform.position-playerTransform.position;
         dist = delta.magnitude;
-        Debug.Log(dist);
+        if(dist>5.0f)
+        {
+            enemy_distance="Far";
+        }
+        else if(dist<=5.0f)
+        {
+            enemy_distance="Close";
+        }
+
+    }
+    void FixedUpdate()
+    {
+        makeDecision();
+        Debug.Log(enemy_distance);
+        Debug.Log(health);
     }
     void makeDecision()
     {
@@ -32,7 +56,7 @@ public class DecisionTree : MonoBehaviour
         {
             Debug.Log("Attack");
         }
-        else if(enemy_distance=="Close" && health=="High")
+        else if(enemy_distance=="Close" && health=="Low")
         {
             Debug.Log("Retreat");
         }
