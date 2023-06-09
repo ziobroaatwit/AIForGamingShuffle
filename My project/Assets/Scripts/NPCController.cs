@@ -58,11 +58,11 @@ public class NPCController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Cube")
-        {
-            other.gameObject.SetActive(false);
-            controller.updateScore(0);
-        }
+        //if (other.gameObject.tag == "Cube")
+        //{
+           // other.gameObject.SetActive(false);
+          //  controller.updateScore(0);
+       // }
     }
     void stateMachine()
     {
